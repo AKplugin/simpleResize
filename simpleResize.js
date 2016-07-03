@@ -4,19 +4,37 @@ function simpleResize(parentTag, prop) {
   var resizeProp = {
     "cursor": prop.cursor || "e-resize",
     "minwidth": prop.minWidth || "50px",
-    "maxwidth": prop.maxWidth
+    "maxwidth": prop.maxWidth,
+    "hover": prop.hover,
+    "retainWidth": prop.retainWidth
   };
   /**
   * code for assigning the minimum width for the table
   */
   $(parentTag).find("td").css("min-width", resizeProp.minwidth);
-  console.log(resizeProp.cursor)
+  
+  /**
+  * code for assigning the width of the td in the table 
+  * when retainWidth is set to true
+  */
+  // if(resizeProp.retainWidth){
+  //   var getTdWidth = localStorage.getItem("retainWidth").toString().split(",");
+  //   for(var i=0;i<getTdWidth.length;i++){
+  //     console.log(getTdWidth[i]+" and "+resizeProp.minwidth)
+  //     $(parentTag).find("tr").eq(0).find("td").eq(i).css({
+  //       "width": getTdWidth[i],
+  //       "min-width":resizeProp.minwidth
+  //     });
+  //   }
+  // }
   var over = false;
   var iEdgeThreshold = 10;
   var pressed = false;
   var start = undefined;
   var startX, startWidth, startTablewidth;
   var rowNum = null;
+  var hoverVal;
+  var hoverColor;
   /**
    * code to find the position of the cursor on td
    */
@@ -32,6 +50,26 @@ function simpleResize(parentTag, prop) {
     }
 
     return [curleft, curtop];
+  }
+
+  function changeBorderProp(){
+    var splitProp = resizeProp.hover.split(" ");
+    for(var i=0;i<splitProp.length;i++){
+        if(splitProp[i].indexOf("px") != -1)
+          hoverVal = splitProp[i];
+        else
+          hoverColor = splitProp[i];
+      }
+
+    if(over){
+      for(var i=0;i<$(parentTag).find("tr").length;i++){
+        $(parentTag).find("tr").eq(i).find("td").eq(rowNum).css("border-right", hoverVal +' solid '+ hoverColor);
+      }
+    }else{
+      for(var i=0;i<$(parentTag).find("tr").length;i++){
+        $(parentTag).find("tr").eq(i).find("td").eq(rowNum).css("border-right", '1px solid black');
+      }
+    }
   }
 
   /**
@@ -78,6 +116,7 @@ function simpleResize(parentTag, prop) {
 
   function mouseMove(event) {
     event.preventDefault();
+    changeBorderProp();
     if (pressed) {
       var newWidth = startWidth + (event.pageX - startX);
       var newTablewidth = startTablewidth + (event.pageX - startX);
@@ -98,6 +137,11 @@ function simpleResize(parentTag, prop) {
     if (pressed) {
       rowNum = -1;
       pressed = false;
+      var getTdWidth = [];
+      for(var i=0;i<$(parentTag).find("tr").eq(0).find("td").length;i++){
+        getTdWidth.push($(parentTag).find("tr").eq(0).find("td").css("width"));
+      }
+      localStorage.setItem("retainWidth", getTdWidth);
     }
   }
 
