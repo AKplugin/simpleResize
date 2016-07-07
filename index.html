@@ -14,8 +14,8 @@
   <div class="headerDiv">
   <ul>
 		<li><a href="#documentation">Documentation</a></li>
-		<li><a href="">License</a></li>
-		<li><a href="">Contact</a></li>
+		<li><a href="#license">License</a></li>
+		<li><a href="#contact">Contact</a></li>
 	</ul>
   </div>    
   <div class="center">
@@ -33,16 +33,69 @@
   	<h5>1. minWidth</h5><pre>jsFiddle</pre>
   	<p>You can define a minimum width for the td's</p>
   	<div class="codestate">
-  		var resize = new simpleResize(**table id**,{
-          "minWidth": "300px",
+  		var resize = new simpleResize(**table id**,{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"minWidth": "300px",<br>
         });
-  	</div>	
+  	</div>
+
+    <h5>2. maxWidth</h5><pre>jsFiddle</pre>
+    <p>You can define a maximum width for the td's</p>
+    <div class="codestate">
+      var resize = new simpleResize(**table id**,{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"maxWidth": "500px",<br>
+        });
+    </div>
+
+    <h5>3. cursor</h5><pre>jsFiddle</pre>
+    <p>You can define the cursor style</p>
+    <div class="codestate">
+      var resize = new simpleResize(**table id**,{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cursor": "pointer",<br>
+        });
+    </div>
+
+    <h5>4. hover</h5><pre>jsFiddle</pre>
+    <p>You can define the hover style</p>
+    <div class="codestate">
+      var resize = new simpleResize(**table id**,{<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"cursor": "red 5px",<br>
+        });
+    </div>	
   </div>
-<!--   <footer>
+
+  <div id="license">
+    <h3>License</h3>
+    <p>simpleResize is fully open source and You can use it for commercial projects, open source projects, or really just about whatever you want. Source code is also released in order to allow custom modifications to adjust it to your own personal needs</p>
+  </div>
+
+  <div id="contact">
+    <h3>Contact</h3>
+    <form>
+      <label>Name</label>
+      <input type="text" name="name">
+      <label>E-mail</label>
+      <input type="email" name="email">
+      <label>Subject</label>
+      <textarea name="subject"></textarea>
+    </form>
+  </div>
+  <footer>
   	created by AKplugin
-  </footer> -->
+  </footer>
   <script type="text/javascript">
-  	$("#documentation").css("top", $(".headerDiv").height()+$(".center").height())
+  	$("#documentation").css("top", $(".headerDiv").height()+$(".center").height());
+
+    $("#license").css("top", $(".headerDiv").height()+$(".center").height()+$("#documentation").height());
+
+    $("#contact").css("top", $(".headerDiv").height()+$(".center").height()+$("#documentation").height()+$("#license").height());
+
+    $("footer").css("top", $(".headerDiv").height()+$(".center").height()+$("#documentation").height()+$("#license").height()+$("#contact").height());
+
+    $(".headerDiv ul li a").click(function(){
+      $('html, body').animate({
+        scrollTop: $($(this).attr('href')).offset().top
+      }, 900);
+    });
   </script>
   </body>
 </html>
