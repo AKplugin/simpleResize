@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Simpleresize by AKplugin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
@@ -12,7 +13,7 @@
 
   <div class="headerDiv">
   <ul>
-		<li><a href="">Documentation</a></li>
+		<li><a href="#documentation">Documentation</a></li>
 		<li><a href="">License</a></li>
 		<li><a href="">Contact</a></li>
 	</ul>
@@ -27,8 +28,21 @@
       <a href="https://github.com/AKplugin/simpleResize/tarball/master" class="btn">Download .tar.gz</a>
   </div>
 
-  <footer>
+  <div id="documentation">
+  	<h3>Documentation</h3>
+  	<h5>1. minWidth</h5><pre>jsFiddle</pre>
+  	<p>You can define a minimum width for the td's</p>
+  	<div class="codestate">
+  		var resize = new simpleResize(**table id**,{
+          "minWidth": "300px",
+        });
+  	</div>	
+  </div>
+<!--   <footer>
   	created by AKplugin
-  </footer>
+  </footer> -->
+  <script type="text/javascript">
+  	$("#documentation").css("top", $(".headerDiv").height()+$(".center").height())
+  </script>
   </body>
 </html>
